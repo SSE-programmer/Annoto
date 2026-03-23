@@ -1,0 +1,103 @@
+.light-theme {
+    // Основные цвета фона
+    --an-bg-primary: #ffffff;
+    --an-bg-secondary: #f8f9fa;
+    --an-bg-tertiary: #f1f3f5;
+    --an-bg-card: #ffffff;
+    --an-bg-hover: #e9ecef;
+
+    // Основные цвета текста
+    --an-text-primary: #212529;
+    --an-text-secondary: #495057;
+    --an-text-tertiary: #6c757d;
+    --an-text-disabled: #adb5bd;
+    --an-text-inverse: #ffffff;
+
+    // Цвета границ
+    --an-border-light: #e9ecef;
+    --an-border-medium: #dee2e6;
+    --an-border-dark: #ced4da;
+
+    // Акцентные цвета
+    --an-accent-primary: #4263eb;
+    --an-accent-primary-hover: #364fc7;
+    --an-accent-primary-active: #2b3a9e;
+    --an-accent-secondary: #f08c00;
+    --an-accent-success: #37b24d;
+    --an-accent-danger: #f03e3e;
+    --an-accent-warning: #fd7e14;
+
+    // Компоненты
+    --an-tooltip-bg: #212529;
+    --an-tooltip-text: #ffffff;
+    --an-tooltip-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+    --an-input-bg: #ffffff;
+    --an-input-border: #dee2e6;
+    --an-input-focus-border: #4263eb;
+    --an-input-focus-shadow: 0 0 0 3px rgba(66, 99, 235, 0.1);
+
+    --an-button-primary-bg: #4263eb;
+    --an-button-primary-text: #ffffff;
+    --an-button-secondary-bg: #f1f3f5;
+    --an-button-secondary-text: #495057;
+
+    --an-scrollbar-track: #f1f1f1;
+    --an-scrollbar-thumb: #c1c1c1;
+    --an-scrollbar-thumb-hover: #a8a8a8;
+
+    // Тень
+    --an-shadow-color: #000000;
+}
+
+.dark-theme {
+    // Основные цвета фона
+    --an-bg-primary: #121212;
+    --an-bg-secondary: #1e1e1e;
+    --an-bg-tertiary: #2d2d2d;
+    --an-bg-card: #1e1e1e;
+    --an-bg-hover: #2d2d2d;
+
+    // Основные цвета текста
+    --an-text-primary: #e9ecef;
+    --an-text-secondary: #ced4da;
+    --an-text-tertiary: #adb5bd;
+    --an-text-disabled: #6c757d;
+    --an-text-inverse: #212529;
+
+    // Цвета границ
+    --an-border-light: #2d2d2d;
+    --an-border-medium: #404040;
+    --an-border-dark: #4a4a4a;
+
+    // Акцентные цвета
+    --an-accent-primary: #5c7cfa;
+    --an-accent-primary-hover: #748ffc;
+    --an-accent-primary-active: #91a7ff;
+    --an-accent-secondary: #ffa94d;
+    --an-accent-success: #51cf66;
+    --an-accent-danger: #ff6b6b;
+    --an-accent-warning: #ff922b;
+
+    // Компоненты
+    --an-tooltip-bg: #2d2d2d;
+    --an-tooltip-text: #e9ecef;
+    --an-tooltip-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+
+    --an-input-bg: #2d2d2d;
+    --an-input-border: #404040;
+    --an-input-focus-border: #5c7cfa;
+    --an-input-focus-shadow: 0 0 0 3px rgba(92, 124, 250, 0.2);
+
+    --an-button-primary-bg: #5c7cfa;
+    --an-button-primary-text: #ffffff;
+    --an-button-secondary-bg: #2d2d2d;
+    --an-button-secondary-text: #e9ecef;
+
+    --an-scrollbar-track: #2d2d2d;
+    --an-scrollbar-thumb: #4a4a4a;
+    --an-scrollbar-thumb-hover: #5a5a5a;
+
+    // Тень
+    --an-shadow-color: #FFFFFF;
+}

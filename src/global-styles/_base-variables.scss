@@ -1,0 +1,33 @@
+:root {
+    $gaps: 4, 8, 12, 16, 18, 24, 32, 36, 48;
+    @each $firstGap in $gaps {
+        --an-gap-#{$firstGap}: #{$firstGap}px;
+
+        @each $secondGap in $gaps {
+            --an-gap-#{$firstGap}-#{$secondGap}: #{$firstGap}px #{$secondGap}px;
+        }
+    }
+
+    $border-radii: 4, 6, 8, 10, 12, 16, 20, 24, 30;
+    @each $border-radius in $border-radii {
+        --an-border-radius-#{$border-radius}: #{$border-radius}px;
+    }
+
+    $paddings: 0, 2, 4, 6, 8, 12, 16, 24;
+    @each $padding in $paddings {
+        --an-padding-#{$padding}: #{$padding}px;
+    }
+
+    $margins: $paddings;
+    @each $margin in $margins {
+        --an-margin-#{$margin}: #{$margins}px;
+    }
+
+    --an-shadow-sm: 0 1px 3px change-color(var(--an-shadow-color), $alpha: 0.12);
+    --an-shadow-md: 0 4px 6px change-color(var(--an-shadow-color), $alpha: 0.1);
+    --an-shadow-lg: 0 10px 15px change-color(var(--an-shadow-color), $alpha: 0.1);
+
+    --an-transition-fast: 150ms ease;
+    --an-transition-base: 250ms ease;
+    --an-transition-slow: 350ms ease;
+}

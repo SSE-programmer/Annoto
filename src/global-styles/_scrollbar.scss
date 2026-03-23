@@ -1,0 +1,30 @@
+::-webkit-scrollbar {
+    display: block;
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--an-scrollbar-track);
+    border-radius: var(--an-border-radius-4);
+
+    margin-block: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--an-scrollbar-thumb);
+    border-radius: var(--an-border-radius-4);
+    transition: background-color var(--an-transition-fast);
+
+    &:hover {
+        background-color: var(--an-scrollbar-thumb-hover);
+    }
+
+    &:active {
+        background-color: var(--an-accent-primary);
+    }
+}
+
+::-webkit-scrollbar-corner {
+    background-color: var(--an-scrollbar-track);
+}
