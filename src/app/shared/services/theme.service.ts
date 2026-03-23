@@ -7,12 +7,13 @@ export enum EThemeType {
 
 const DEFAULT_THEME = EThemeType.LIGHT;
 const STORAGE_THEME_FIELD_NAME = 'theme:color';
-const THEME_CHANGE_TRANSITION_CLASS = 'global-color-transition'
 const THEME_PREFIX = 'an-theme-';
 
 @Injectable({ providedIn: 'root' })
 export class ThemeService {
     private readonly _colorThemeSignal = signal<EThemeType>(this._loadInitialThemeState());
+
+    public readonly colorThemeSignal = this._colorThemeSignal.asReadonly();
 
     private readonly _colorThemeChangeEffect = effect(() => {
         const theme = this._colorThemeSignal();
@@ -25,7 +26,7 @@ export class ThemeService {
         this._colorThemeSignal.update(() => theme);
     }
 
-    private _loadInitialThemeState() {
+    private _loadInitialThemeState(): EThemeType {
         const saved = localStorage.getItem(STORAGE_THEME_FIELD_NAME);
         const foundedTheme = Object
             .values(EThemeType)
@@ -46,11 +47,6 @@ export class ThemeService {
             .forEach(className => classList.remove(className));
 
         classList.add(`${ THEME_PREFIX }${ theme }`);
-        classList.add(THEME_CHANGE_TRANSITION_CLASS);
         localStorage.setItem(STORAGE_THEME_FIELD_NAME, theme.toString());
-
-        setTimeout(() => {
-            classList.remove(THEME_CHANGE_TRANSITION_CLASS);
-        }, 500);
     }
 }

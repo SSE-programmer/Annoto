@@ -1,0 +1,34 @@
+:host {
+    .header {
+        background: var(--an-bg-secondary);
+        border-bottom: 1px solid var(--an-border-light);
+        box-shadow: var(--an-shadow-sm);
+    }
+
+    .header__container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--an-gap-12);
+    }
+
+    .site-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--an-text-primary);
+    }
+
+    .theme-toggle {
+        border: 1px solid var(--an-border-medium);
+        border-radius: var(--an-border-radius-8);
+        padding: var(--an-gap-8-12);
+        background: var(--an-button-secondary-bg);
+        color: var(--an-button-secondary-text);
+        transition: background-color var(--an-transition-base), color var(--an-transition-base), border-color var(--an-transition-fast);
+    }
+
+    .theme-toggle:hover {
+        background: var(--an-bg-hover);
+        border-color: var(--an-accent-primary);
+    }
+}

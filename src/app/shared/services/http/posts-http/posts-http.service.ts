@@ -1,20 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { emulateHttpDelay } from '@shared/operators/emulate-http-delay.operator';
+import { ICreatePostDto, IPost, IUpdatePostDto } from './models';
+
 
 const STORAGE_POSTS_KEY = 'posts:collection';
-
-export interface IPost {
-    id: string;
-    title: string;
-    content: string;
-    createdAt: string;
-    updatedAt: string;
-}
-
-export interface ICreatePostDto extends Pick<IPost, 'title' | 'content'>{}
-
-export interface IUpdatePostDto extends Pick<IPost, 'id' | 'title' | 'content'>{}
 
 @Injectable({ providedIn: 'root' })
 export class PostsHttpService {

@@ -1,0 +1,10 @@
+<header class="header">
+    <div class="header__container page-part-container">
+        <h1 class="site-title">Annoto</h1>
+
+        <an-theme-switch
+            [isDarkMode]="isDarkThemeSignal()"
+            (themeChange)="toggleTheme()"
+        />
+    </div>
+</header>

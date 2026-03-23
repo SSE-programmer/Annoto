@@ -1,0 +1,23 @@
+:host {
+    .footer {
+        border-top: 1px solid var(--an-border-light);
+        background: var(--an-bg-secondary);
+    }
+
+    .footer__container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--an-gap-8);
+        color: var(--an-text-secondary);
+    }
+
+    .footer__container a {
+        color: var(--an-accent-primary);
+        text-decoration: none;
+    }
+
+    .footer__container a:hover {
+        color: var(--an-accent-primary-hover);
+    }
+}

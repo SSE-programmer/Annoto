@@ -1,0 +1,22 @@
+:host {
+    .article-card {
+        display: flex;
+        flex-direction: column;
+        gap: var(--an-gap-12);
+        padding: var(--an-padding-16);
+        border-radius: var(--an-border-radius-12);
+        border: 1px solid var(--an-border-light);
+        background: var(--an-bg-card);
+        box-shadow: var(--an-shadow-md);
+    }
+
+    .article-card__title {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: var(--an-text-primary);
+    }
+
+    .article-card__text {
+        color: var(--an-text-secondary);
+    }
+}
