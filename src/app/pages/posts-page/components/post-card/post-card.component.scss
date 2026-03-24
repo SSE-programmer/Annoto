@@ -6,14 +6,18 @@
         display: flex;
         flex-direction: column;
         gap: var(--an-gap-12);
+        max-height: 200px;
         padding: var(--an-padding-16);
         border-radius: var(--an-border-radius-12);
         border: 1px solid var(--an-border-light);
         background: var(--an-bg-card);
         box-shadow: var(--an-shadow-md);
-
-        max-height: 200px;
         overflow: hidden;
+        cursor: pointer;
+
+        :hover {
+            box-shadow: var(--an-shadow-sm);
+        }
 
         &__title {
             font-size: 1.125rem;
@@ -33,6 +37,7 @@
 
             height: var(--bottom-gradient-height);
             background: linear-gradient(0, var(--an-bg-card) 5%, transparent 100%);
+            pointer-events: none;
         }
     }
 }

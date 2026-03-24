@@ -12,11 +12,11 @@ export class ThemeSwitchComponent {
     public readonly themeChange = output<boolean>();
 
     protected readonly nextThemeLabelSignal = computed(() => {
-        return `Toggle ${(this.isDarkMode() ? 'light' : 'dark')} mode`;
+        return `Переключить на ${(this.isDarkMode() ? 'светлый' : 'темный')} режим`;
     });
 
     protected readonly screenReaderModeLabelSignal = computed(() => {
-        return this.isDarkMode() ? 'Dark mode' : 'Light mode';
+        return this.isDarkMode() ? 'Темный режим' : 'Светлый режим';
     });
 
     public onToggle(): void {
