@@ -1,0 +1,24 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    gap: var(--an-gap-24);
+    padding: var(--an-padding-12);
+}
+
+.confirm-dialog__body {
+    min-width: min(100%, 320px);
+}
+
+.confirm-dialog__message {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--an-text-primary);
+}
+
+.confirm-dialog__footer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--an-gap-12);
+    justify-content: flex-end;
+}

@@ -1,15 +1,21 @@
 <an-button
     class="create-post-button"
     label="Создать статью"
+    ariaLabel="Создать статью"
     dashed
     (onClick)="openCreatePostModal()"
 >
-    <ng-template #iconRight><an-icon-plus/></ng-template>
+    <ng-template #iconRight>
+        <an-icon-plus/>
+    </ng-template>
 </an-button>
 
 
 <div class="posts-grid">
     @for (post of postsSignal(); track post.id) {
-        <an-post-card [post]="post"/>
+        <an-post-card
+            [post]="post"
+            (onClick)="goToPostPage(post.id)"
+        />
     }
 </div>

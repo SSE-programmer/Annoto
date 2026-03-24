@@ -1,8 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 import { firstValueFrom } from 'rxjs';
 import { vi } from 'vitest';
+import {
+    POST_CONTENT_LIST_PREVIEW_LENGTH,
+    POST_CONTENT_MAX_LENGTH,
+} from '@shared/constants/post-content.constants';
 import { PostsHttpService } from './posts-http.service';
-import { IPost } from './models';
+import { IPost, IPostSummary } from './models';
 
 describe('PostsHttpService', () => {
     let service: PostsHttpService;
@@ -49,7 +53,7 @@ describe('PostsHttpService', () => {
         expect(posts).toEqual([]);
     });
 
-    it('creates post with trimmed fields and persists it', async () => {
+    it('creates post with trimmed fields, contentPreview and persists it', async () => {
         const createdPost = await firstValueFrom(service.createPost({
             title: '  New title  ',
             content: '  New content  ',
@@ -58,12 +62,52 @@ describe('PostsHttpService', () => {
         expect(createdPost.id).toBeTruthy();
         expect(createdPost.title).toBe('New title');
         expect(createdPost.content).toBe('New content');
+        expect(createdPost.contentPreview).toBe('New content');
         expect(createdPost.createdAt).toBeTruthy();
         expect(createdPost.updatedAt).toBeTruthy();
 
         const posts = await firstValueFrom(service.getPosts());
         expect(posts).toHaveLength(1);
-        expect(posts[0].title).toBe('New title');
+        const listItem = posts[0] as IPostSummary & { content?: string };
+        expect(listItem.title).toBe('New title');
+        expect(listItem.contentPreview).toBe('New content');
+        expect(listItem.content).toBeUndefined();
+    });
+
+    it('getPosts returns summaries without full content', async () => {
+        const full: IPost = {
+            id: 'post-1',
+            title: 'T',
+            content: 'Full body text here',
+            contentPreview: 'Full body text here',
+            createdAt: '2026-01-01T10:00:00.000Z',
+            updatedAt: '2026-01-01T10:00:00.000Z',
+        };
+        storage[STORAGE_POSTS_KEY] = JSON.stringify([full]);
+
+        const posts = await firstValueFrom(service.getPosts());
+
+        expect(posts).toEqual([
+            {
+                id: 'post-1',
+                title: 'T',
+                contentPreview: 'Full body text here',
+                createdAt: '2026-01-01T10:00:00.000Z',
+                updatedAt: '2026-01-01T10:00:00.000Z',
+            },
+        ]);
+    });
+
+    it('truncates contentPreview to POST_CONTENT_LIST_PREVIEW_LENGTH on create', async () => {
+        const longContent = 'x'.repeat(POST_CONTENT_MAX_LENGTH + 50);
+        const createdPost = await firstValueFrom(service.createPost({
+            title: 'Long',
+            content: longContent,
+        }));
+
+        expect(createdPost.content.length).toBe(POST_CONTENT_MAX_LENGTH + 50);
+        expect(createdPost.contentPreview.length).toBe(POST_CONTENT_LIST_PREVIEW_LENGTH);
+        expect(createdPost.contentPreview).toBe('x'.repeat(POST_CONTENT_LIST_PREVIEW_LENGTH));
     });
 
     it('returns post by id when it exists', async () => {
@@ -71,6 +115,7 @@ describe('PostsHttpService', () => {
             id: 'post-1',
             title: 'Seed title',
             content: 'Seed content',
+            contentPreview: 'Seed content',
             createdAt: '2026-01-01T10:00:00.000Z',
             updatedAt: '2026-01-01T10:00:00.000Z',
         };
@@ -81,17 +126,36 @@ describe('PostsHttpService', () => {
         expect(post).toEqual(seededPost);
     });
 
+    it('normalizes legacy storage rows without contentPreview field', async () => {
+        storage[STORAGE_POSTS_KEY] = JSON.stringify([
+            {
+                id: 'legacy-1',
+                title: 'Legacy',
+                content: 'Hello legacy',
+                createdAt: '2026-01-01T10:00:00.000Z',
+                updatedAt: '2026-01-01T10:00:00.000Z',
+            },
+        ]);
+
+        const full = await firstValueFrom(service.getPostById('legacy-1'));
+        expect(full.contentPreview).toBe('Hello legacy');
+
+        const list = await firstValueFrom(service.getPosts());
+        expect(list[0].contentPreview).toBe('Hello legacy');
+    });
+
     it('throws when post by id is missing', async () => {
         await expect(firstValueFrom(service.getPostById('missing-id')))
             .rejects
             .toThrow('was not found');
     });
 
-    it('updates post fields and refreshes updatedAt', async () => {
+    it('updates post fields, contentPreview and refreshes updatedAt', async () => {
         const seededPost: IPost = {
             id: 'post-1',
             title: 'Initial title',
             content: 'Initial content',
+            contentPreview: 'Initial content',
             createdAt: '2026-01-01T10:00:00.000Z',
             updatedAt: '2026-01-01T10:00:00.000Z',
         };
@@ -105,6 +169,7 @@ describe('PostsHttpService', () => {
 
         expect(updatedPost.title).toBe('Updated title');
         expect(updatedPost.content).toBe('Updated content');
+        expect(updatedPost.contentPreview).toBe('Updated content');
         expect(updatedPost.createdAt).toBe('2026-01-01T10:00:00.000Z');
         expect(updatedPost.updatedAt).not.toBe('2026-01-01T10:00:00.000Z');
     });
@@ -114,6 +179,7 @@ describe('PostsHttpService', () => {
             id: 'post-1',
             title: 'One',
             content: 'First',
+            contentPreview: 'First',
             createdAt: '2026-01-01T10:00:00.000Z',
             updatedAt: '2026-01-01T10:00:00.000Z',
         };
@@ -121,6 +187,7 @@ describe('PostsHttpService', () => {
             id: 'post-2',
             title: 'Two',
             content: 'Second',
+            contentPreview: 'Second',
             createdAt: '2026-01-01T10:00:00.000Z',
             updatedAt: '2026-01-01T10:00:00.000Z',
         };
@@ -129,7 +196,15 @@ describe('PostsHttpService', () => {
         await firstValueFrom(service.deletePost('post-1'));
 
         const posts = await firstValueFrom(service.getPosts());
-        expect(posts).toEqual([secondPost]);
+        expect(posts).toEqual([
+            {
+                id: 'post-2',
+                title: 'Two',
+                contentPreview: 'Second',
+                createdAt: '2026-01-01T10:00:00.000Z',
+                updatedAt: '2026-01-01T10:00:00.000Z',
+            },
+        ]);
     });
 
     it('returns empty list for invalid storage payload', async () => {
@@ -159,5 +234,6 @@ describe('PostsHttpService', () => {
 
         expect(posts).toHaveLength(1);
         expect(posts[0].id).toBe('post-1');
+        expect(posts[0].contentPreview).toBe('Record');
     });
 });

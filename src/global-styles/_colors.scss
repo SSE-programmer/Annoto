@@ -56,8 +56,11 @@
     --an-disabled-bg: #DDDDDD;
     --an-disabled-border: #777777;
 
-    // Тень
-    --an-shadow-color: #000000;
+    // Тень (RGB-компоненты для rgba(var(--an-shadow-color), α) на этом же элементе)
+    --an-shadow-color: 0, 0, 0;
+    --an-shadow-sm: 0 1px 3px rgba(var(--an-shadow-color), 0.12);
+    --an-shadow-md: 0 4px 6px rgba(var(--an-shadow-color), 0.1);
+    --an-shadow-lg: 0 10px 15px rgba(var(--an-shadow-color), 0.1);
 }
 
 .an-theme-dark {
@@ -119,5 +122,8 @@
     --an-disabled-border: #777777;
 
     // Тень
-    --an-shadow-color: #FFFFFF;
+    --an-shadow-color: 255, 255, 255;
+    --an-shadow-sm: 0 1px 3px rgba(var(--an-shadow-color), 0.12);
+    --an-shadow-md: 0 4px 6px rgba(var(--an-shadow-color), 0.1);
+    --an-shadow-lg: 0 10px 15px rgba(var(--an-shadow-color), 0.1);
 }

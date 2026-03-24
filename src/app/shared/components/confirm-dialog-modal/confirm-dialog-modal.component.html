@@ -1,0 +1,16 @@
+<main class="confirm-dialog__body">
+    <p class="confirm-dialog__message">{{ message }}</p>
+</main>
+
+<footer class="confirm-dialog__footer">
+    <an-button
+        [label]="confirmLabel"
+        (onClick)="onConfirm()"
+    />
+    <an-button
+        [label]="cancelLabel"
+        severity="secondary"
+        outlined
+        (onClick)="onCancel()"
+    />
+</footer>

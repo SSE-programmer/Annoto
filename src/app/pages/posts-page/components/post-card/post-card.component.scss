@@ -7,6 +7,7 @@
         flex-direction: column;
         gap: var(--an-gap-12);
         max-height: 200px;
+        min-height: 200px;
         padding: var(--an-padding-16);
         border-radius: var(--an-border-radius-12);
         border: 1px solid var(--an-border-light);
@@ -15,8 +16,13 @@
         overflow: hidden;
         cursor: pointer;
 
-        :hover {
-            box-shadow: var(--an-shadow-sm);
+        &:hover {
+            box-shadow: var(--an-shadow-lg);
+        }
+
+        &__date {
+            font-size: 0.8rem;
+            color: var(--an-text-tertiary);
         }
 
         &__title {

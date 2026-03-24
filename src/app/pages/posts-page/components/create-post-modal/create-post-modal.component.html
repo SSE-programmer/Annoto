@@ -1,5 +1,5 @@
 <header class="header">
-    <h2>Новая статья</h2>
+    <h2>{{ createPostModalService.editingPost ? 'Редактирование статьи' : 'Новая статья' }}</h2>
 
     <an-icon-cross
         role="button"
@@ -66,12 +66,14 @@
 <footer class="footer">
     <an-button
         label="Сохранить"
+        ariaLabel="Сохранить статью"
         [loading]="isPostSaving()"
         (click)="savePost()"
     />
 
     <an-button
         label="Отменить"
+        ariaLabel="Отменить создание статьи"
         severity="secondary"
         outlined
         (click)="close()"

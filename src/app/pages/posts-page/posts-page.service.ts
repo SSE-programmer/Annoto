@@ -1,4 +1,5 @@
 import { DestroyRef, inject, Injectable, signal } from '@angular/core';
+import { Router } from '@angular/router';
 import { PostsHttpService } from '@shared/services/http/posts-http/posts-http.service';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { BehaviorSubject, finalize, switchMap, tap } from 'rxjs';
@@ -13,6 +14,7 @@ export class PostsPageService {
     private readonly postsHttpService = inject(PostsHttpService);
     private readonly destroyRef = inject(DestroyRef);
     private readonly dynamicModalService = inject(DynamicModalService);
+    private readonly router = inject(Router);
 
     private readonly _isPostsLoadingSignal = signal(false);
     public readonly isPostsLoadingSignal = this._isPostsLoadingSignal.asReadonly();
@@ -37,5 +39,9 @@ export class PostsPageService {
                 onSave: () => this._updatePosts$.next(null)
             }
         });
+    }
+
+    public goToPostPage(postId: string): void {
+        void this.router.navigate(['post', postId]);
     }
 }

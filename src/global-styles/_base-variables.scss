@@ -25,10 +25,6 @@
         --an-margin-#{$margin}: #{$margins}px;
     }
 
-    --an-shadow-sm: 0 1px 3px change-color(var(--an-shadow-color), $alpha: 0.12);
-    --an-shadow-md: 0 4px 6px change-color(var(--an-shadow-color), $alpha: 0.1);
-    --an-shadow-lg: 0 10px 15px change-color(var(--an-shadow-color), $alpha: 0.1);
-
     --an-transition-fast: 150ms ease;
     --an-transition-base: 250ms ease;
     --an-transition-slow: 350ms ease;

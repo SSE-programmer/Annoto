@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PostCardComponent } from './post-card.component';
-import { IPost } from '@shared/services/http/posts-http/models';
+import { IPostSummary } from '@shared/services/http/posts-http/models';
 
 describe('PostCardComponent', () => {
     let component: PostCardComponent;
@@ -20,10 +20,10 @@ describe('PostCardComponent', () => {
         fixture.componentRef.setInput('post', {
             id: '1',
             title: 'Test title',
-            content: 'Test content',
+            contentPreview: 'Test content',
             createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString(),
-        } satisfies IPost);
+        } satisfies IPostSummary);
         fixture.detectChanges();
 
         expect(component).toBeTruthy();
@@ -33,10 +33,10 @@ describe('PostCardComponent', () => {
         fixture.componentRef.setInput('post', {
             id: '2',
             title: 'Server authoritative model',
-            content: 'Client does not decide final game state.',
+            contentPreview: 'Client does not decide final game state.',
             createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString(),
-        } satisfies IPost);
+        } satisfies IPostSummary);
         fixture.detectChanges();
 
         const compiled = fixture.nativeElement as HTMLElement;

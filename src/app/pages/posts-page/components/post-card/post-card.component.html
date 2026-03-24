@@ -3,8 +3,14 @@
     #articleCard
     (click)="onClick.emit($event)"
 >
+    <time
+        class="article-card__date"
+        [attr.datetime]="post().createdAt"
+    >
+        {{ post().createdAt | date: 'dd.MM.yyyy, HH:mm' }}
+    </time>
     <h2 class="article-card__title">{{ post().title }}</h2>
-    <p class="article-card__text">{{ post().content }}</p>
+    <p class="article-card__text">{{ post().contentPreview }}</p>
 
     @if (isHeightOverflow()) {
         <span class="article-card__bottom-gradient"></span>

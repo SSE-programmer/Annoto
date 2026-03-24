@@ -29,7 +29,7 @@ describe('ThemeSwitchComponent', () => {
         const checkbox = compiled.querySelector('input[role="switch"]') as HTMLInputElement;
 
         expect(checkbox.checked).toBe(true);
-        expect(checkbox.getAttribute('aria-label')).toContain('light');
+        expect(checkbox.getAttribute('aria-label')).toContain('светлый');
     });
 
     it('should emit opposite mode on toggle', () => {

@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CreatePostModalService } from '@pages/posts-page/components/create-post-modal/create-post-modal.service';
+import { IPost } from '@shared/services/http/posts-http/models';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ErrorsFieldDirective } from '@shared/directives/get-error-description/errors-field.directive';
 import { ButtonComponent } from '@shared/ui/button/button.component';
@@ -7,6 +8,7 @@ import { IconCrossComponent } from '@shared/ui/icons/icon-cross/icon-cross.compo
 
 export interface IConfig {
     onSave?: () => void;
+    post?: IPost;
 }
 
 @Component({
@@ -23,7 +25,7 @@ export interface IConfig {
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreatePostModalComponent {
-    private readonly createPostModalService = inject(CreatePostModalService);
+    protected readonly createPostModalService = inject(CreatePostModalService);
 
     protected readonly form = this.createPostModalService.form;
 

@@ -1,0 +1,80 @@
+@if (postLoadingSignal()) {
+    <div
+        class="loader"
+        aria-busy="true"
+        aria-live="polite"
+    >
+        <an-loading-spinner/>
+    </div>
+} @else if (postSignal(); as post) {
+    <div class="toolbar">
+        <a
+            class="back"
+            routerLink="/"
+        >
+            <an-icon-back/>
+            К списку статей</a>
+        <div class="toolbar__actions">
+            <an-button
+                label="Редактировать"
+                ariaLabel="Редактировать статью"
+                outlined
+                size="small"
+                (onClick)="openEditPostModal(post)"
+            >
+                <ng-template #iconLeft>
+                    <an-icon-pencil class="edit-icon"/>
+                </ng-template>
+            </an-button>
+            <an-button
+                label="Удалить"
+                ariaLabel="Удалить статью"
+                outlined
+                severity="secondary"
+                size="small"
+                (onClick)="openDeletePostConfirm(post)"
+            >
+                <ng-template #iconLeft>
+                    <an-icon-trash class="remove-icon"/>
+                </ng-template>
+            </an-button>
+        </div>
+    </div>
+    <article class="article">
+        <div class="article__meta">
+            <p class="article__meta__line">
+                <span class="article__meta__label">Создано:</span>
+                <time
+                    class="article__meta__value"
+                    [attr.datetime]="post.createdAt"
+                >{{ post.createdAt | date: 'dd.MM.yyyy, HH:mm' }}</time>
+            </p>
+            @if (hasDistinctUpdatedAt(post)) {
+                <p class="article__meta__line">
+                    <span class="article__meta__label">Изменено:</span>
+                    <time
+                        class="article__meta__value"
+                        [attr.datetime]="post.updatedAt"
+                    >{{ post.updatedAt | date: 'dd.MM.yyyy, HH:mm' }}</time>
+                </p>
+            }
+        </div>
+        <h1 class="title">{{ post.title }}</h1>
+        <p class="content">{{ post.content }}</p>
+    </article>
+} @else {
+    <div class="toolbar toolbar--single">
+        <a
+            class="back"
+            routerLink="/"
+        >
+            <an-icon-back/>
+            К списку статей</a>
+    </div>
+    <p
+        class="not-found"
+        role="status"
+    >
+        Статья не найдена.
+    </p>
+}

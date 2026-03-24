@@ -2,23 +2,23 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PostsPageComponent } from './posts-page.component';
 import { PostsHttpService } from '@shared/services/http/posts-http/posts-http.service';
 import { of } from 'rxjs';
-import { IPost } from '@shared/services/http/posts-http/models';
+import { IPostSummary } from '@shared/services/http/posts-http/models';
 
 describe('PostsPageComponent', () => {
     let component: PostsPageComponent;
     let fixture: ComponentFixture<PostsPageComponent>;
-    const postsMock: IPost[] = [
+    const postsMock: IPostSummary[] = [
         {
             id: 'post-1',
             title: 'Post one',
-            content: 'First post content',
+            contentPreview: 'First post content',
             createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString(),
         },
         {
             id: 'post-2',
             title: 'Post two',
-            content: 'Second post content',
+            contentPreview: 'Second post content',
             createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString(),
         }

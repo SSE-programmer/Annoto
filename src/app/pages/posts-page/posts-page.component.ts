@@ -25,4 +25,8 @@ export class PostsPageComponent {
     protected openCreatePostModal(): void {
         this.postsPageService.openCreatePostModal();
     }
+
+    protected goToPostPage(postId: string): void {
+        this.postsPageService.goToPostPage(postId);
+    }
 }

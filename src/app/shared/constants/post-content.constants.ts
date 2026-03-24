@@ -1,0 +1,3 @@
+export const POST_CONTENT_MAX_LENGTH = 5000;
+
+export const POST_CONTENT_LIST_PREVIEW_LENGTH = 250;

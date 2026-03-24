@@ -8,17 +8,18 @@ import {
     signal,
     viewChild
 } from '@angular/core';
-import { IPost } from '@shared/services/http/posts-http/models';
+import { DatePipe } from '@angular/common';
+import { IPostSummary } from '@shared/services/http/posts-http/models';
 
 @Component({
     selector: 'an-post-card',
-    imports: [],
+    imports: [DatePipe],
     templateUrl: './post-card.component.html',
     styleUrl: './post-card.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PostCardComponent implements AfterViewInit {
-    public readonly post = input.required<IPost>();
+    public readonly post = input.required<IPostSummary>();
     public readonly onClick = output<PointerEvent>();
 
     private readonly _isHeightOverflow = signal(false);
