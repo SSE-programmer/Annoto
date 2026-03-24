@@ -3,10 +3,13 @@
 @use "base-variables";
 @use "scrollbar";
 @use "containers";
+@use "fonts";
 
 body {
     display: block;
     min-height: 100dvh;
     color: var(--an-text-primary);
     background: var(--an-bg-primary);
+
+    font-family: 'Roboto', sans-serif;
 }

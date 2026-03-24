@@ -1,0 +1,44 @@
+<button
+    [class]="classes"
+    [type]="type()"
+    [disabled]="disabled()"
+    [attr.aria-label]="ariaLabel() || label()"
+    (click)="handleClick($event)"
+    (focus)="onFocus.emit($event)"
+    (blur)="onBlur.emit($event)"
+>
+    <div class="an-button-content">
+        <ng-container *ngTemplateOutlet="leftContent"/>
+
+        @if (label()) {
+            <span class="an-button-label">{{ label() }}</span>
+        }
+        <ng-content/>
+
+        <ng-container *ngTemplateOutlet="rightContent"/>
+    </div>
+</button>
+
+<ng-template #leftContent>
+    @if (loading() && loadingPosition() === 'left') {
+        <ng-container *ngTemplateOutlet="loadingTemplate"/>
+    } @else if (iconLeftTemplate()) {
+        <ng-container *ngTemplateOutlet="iconLeftTemplate()"/>
+    }
+</ng-template>
+
+<ng-template #rightContent>
+    @if (loading() && loadingPosition() === 'right') {
+        <ng-container *ngTemplateOutlet="loadingTemplate"/>
+    } @else if (iconRightTemplate()) {
+        <ng-container *ngTemplateOutlet="iconRightTemplate()"/>
+    }
+</ng-template>
+
+<ng-template #loadingTemplate>
+    @if (loadingIndicatorTemplate()) {
+        <ng-container *ngTemplateOutlet="loadingIndicatorTemplate()"/>
+    } @else {
+        <an-loading-spinner/>
+    }
+</ng-template>

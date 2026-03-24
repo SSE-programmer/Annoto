@@ -1,11 +1,15 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { PostsPageService } from '@pages/posts-page/posts-page.service';
 import { PostCardComponent } from '@pages/posts-page/components/post-card/post-card.component';
+import { ButtonComponent } from '@shared/ui/button/button.component';
+import { IconPlusComponent } from '@shared/ui/icons/icon-plus/icon-plus.component';
 
 @Component({
     selector: 'an-posts-page',
     imports: [
-        PostCardComponent
+        PostCardComponent,
+        ButtonComponent,
+        IconPlusComponent
     ],
     providers: [PostsPageService],
     templateUrl: './posts-page.component.html',

@@ -1,0 +1,76 @@
+@use './styles/severity-theme' as severity;
+
+:host {
+    @include severity.severity-theme();
+
+    display: inline-flex;
+
+    .an-button {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--an-gap-8);
+        width: 100%;
+        border: 2px solid transparent;
+        border-radius: var(--an-border-radius-20);
+        cursor: pointer;
+        overflow: hidden;
+        transition: all 0.3s ease;
+
+        font-family: inherit;
+        font-weight: 400;
+        line-height: 120%;
+        text-align: center;
+
+        &-content {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--an-gap-8);
+            width: 100%;
+        }
+
+        &-label {
+            width: 100%;
+        }
+
+        &-small {
+            padding: var(--an-padding-8) var(--an-padding-24);
+            border-radius: var(--an-border-radius-12);
+            font-size: 12px;
+        }
+
+        &-normal {
+            padding: 10px var(--an-padding-24);
+            border-radius: var(--an-border-radius-20);
+            font-size: 18px;
+        }
+
+        &-outlined {
+            background-color: transparent;
+            border: 2px solid currentColor;
+        }
+
+        &-dashed {
+            background-color: transparent;
+            border: 2px dashed currentColor;
+        }
+
+        &-loading {
+            cursor: default;
+        }
+
+        &:disabled {
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        &:not(:disabled):focus-visible {
+            outline: none;
+            border-color: var(--an-input-focus-border);
+            box-shadow: var(--an-input-focus-shadow);
+        }
+    }
+}

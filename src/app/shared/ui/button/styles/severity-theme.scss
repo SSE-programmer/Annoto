@@ -1,0 +1,35 @@
+@mixin severity-theme() {
+    .an-button-primary {
+        background: var(--an-button-primary-bg);
+        color: var(--an-button-primary-text);
+
+        &.an-button-outlined, &.an-button-dashed {
+            color: var(--an-button-primary-bg);
+        }
+
+        &:disabled {
+            color: var(--an-disabled-text);
+
+            &:not(.an-button-outlined):not(.an-button-dashed) {
+                background: var(--an-disabled-bg);
+            }
+        }
+    }
+
+    .an-button-secondary {
+        background-color: var(--an-button-secondary-bg);;
+        color: var(--an-button-secondary-text);
+
+        &.an-button-outlined, &.an-button-dashed {
+            color: var(--an-button-secondary-bg);;
+        }
+
+        &:disabled {
+            color: var(--an-disabled-text);
+
+            &:not(.an-button-outlined):not(.an-button-dashed) {
+                background: var(--an-disabled-bg);
+            }
+        }
+    }
+}
