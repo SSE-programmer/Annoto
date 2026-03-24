@@ -1,3 +1,4 @@
+import { DOCUMENT } from '@angular/common';
 import {
     ApplicationRef,
     ComponentRef,
@@ -5,8 +6,9 @@ import {
     inject,
     Injectable,
     Injector,
+    RendererFactory2,
     Type,
-    ViewContainerRef
+    ViewContainerRef,
 } from '@angular/core';
 import { DynamicModalComponent } from './dynamic-modal.component';
 import { DynamicModalConfig } from './dynamic-modal-config';
@@ -30,6 +32,10 @@ export interface IDynamicModalStore {
 export class DynamicModalService {
     private readonly appRef = inject(ApplicationRef);
     private readonly injector = inject(Injector);
+    private readonly document = inject(DOCUMENT);
+    private readonly rendererFactory = inject(RendererFactory2);
+
+    private _rootRenderer = this.rendererFactory.createRenderer(null, null);
 
     public dynamicModalStore: IDynamicModalStore = {
         modalCollection: {},
@@ -40,7 +46,7 @@ export class DynamicModalService {
 
     private _viewContainerRef: ViewContainerRef | null = null;
     private _newModalParams: null | undefined | {
-        componentType: Type<any>,
+        componentType: Type<unknown>,
         config: DynamicModalConfig
     };
 
@@ -48,7 +54,7 @@ export class DynamicModalService {
         this._viewContainerRef = vcr;
     }
 
-    public appendModalComponentToBody(componentType: Type<any>, config: DynamicModalConfig, injector?: Injector): DynamicModalRef {
+    public appendModalComponentToBody(componentType: Type<unknown>, config: DynamicModalConfig, injector?: Injector): DynamicModalRef {
         if (!this._viewContainerRef) {
             throw new Error('ViewContainerRef must be defined');
         }
@@ -70,8 +76,8 @@ export class DynamicModalService {
 
         modalRef.reference = componentRef;
 
-        const domElem = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
-        document.body.appendChild(domElem);
+        const domElem = (componentRef.hostView as EmbeddedViewRef<unknown>).rootNodes[0] as HTMLElement;
+        this._rootRenderer.appendChild(this.document.body, domElem);
 
         this.modalComponentRef = componentRef;
 
@@ -89,7 +95,7 @@ export class DynamicModalService {
         return modalRef;
     }
 
-    public open<C>(componentType: Type<any>, config: DynamicModalConfig<C>, injector?: Injector): DynamicModalRef {
+    public open<C>(componentType: Type<unknown>, config: DynamicModalConfig<C>, injector?: Injector): DynamicModalRef {
         this._checkConfigRequiredParameters(config);
 
         return this.appendModalComponentToBody(componentType, config, injector);
@@ -134,13 +140,19 @@ export class DynamicModalService {
         }
 
         const modalDomElement = dynamicModalRef.location.nativeElement;
+        const renderer = this._rootRenderer;
 
-        modalDomElement.addEventListener('animationend', () => {
+        const unregister = renderer.listen(modalDomElement, 'animationend', () => {
+            unregister();
             this.appRef.detachView(dynamicModalRef.hostView);
             dynamicModalRef.destroy();
-        }, { once: true });
+        });
 
-        modalDomElement.querySelector('.dynamic-modal-wrapper').classList.add('closed');
+        const wrapper = modalDomElement.querySelector('.dynamic-modal-wrapper') as HTMLElement | null;
+
+        if (wrapper) {
+            renderer.addClass(wrapper, 'closed');
+        }
     }
 
     private _checkConfigRequiredParameters(config: DynamicModalConfig): void {

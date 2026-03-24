@@ -1,7 +1,7 @@
+import { DOCUMENT } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     ComponentRef,
     DestroyRef,
@@ -11,6 +11,7 @@ import {
     Injector,
     OnDestroy,
     OnInit,
+    Renderer2,
     signal,
     Type,
     viewChild,
@@ -33,13 +34,14 @@ const RESIZE_EVENT_DEBOUNCE = 500;
 })
 export class DynamicModalComponent implements OnInit, AfterViewInit, OnDestroy {
     public readonly config = inject(DynamicModalConfig);
-    private readonly cd = inject(ChangeDetectorRef);
     private readonly dynamicModalService = inject(DynamicModalService);
     private readonly destroyRef = inject(DestroyRef);
     private readonly injector = inject(Injector);
+    private readonly renderer = inject(Renderer2);
+    private readonly document = inject(DOCUMENT);
 
-    public childComponentType: Type<any> | null = null;
-    public componentRef: ComponentRef<any> | null = null;
+    public childComponentType: Type<unknown> | null = null;
+    public componentRef: ComponentRef<unknown> | null = null;
 
     private readonly _widthSignal = signal<string | undefined>(undefined);
     public readonly widthSignal = this._widthSignal.asReadonly();
@@ -55,7 +57,7 @@ export class DynamicModalComponent implements OnInit, AfterViewInit, OnDestroy {
         this.closeModal();
     }
 
-    private readonly _resizeSubscription = fromEvent(window, 'resize')
+    private readonly _resizeSubscription = fromEvent(this.document.defaultView ?? window, 'resize')
         .pipe(
             debounceTime(RESIZE_EVENT_DEBOUNCE),
             takeUntilDestroyed(this.destroyRef),
@@ -74,7 +76,7 @@ export class DynamicModalComponent implements OnInit, AfterViewInit, OnDestroy {
         }
 
         requestAnimationFrame(() => {
-            this._dynamicModalSignal().nativeElement.classList.add('transition');
+            this.renderer.addClass(this._dynamicModalSignal().nativeElement, 'transition');
         });
 
         this._loadChildComponent(this.childComponentType);
@@ -90,11 +92,11 @@ export class DynamicModalComponent implements OnInit, AfterViewInit, OnDestroy {
         }
     }
 
-    private _loadChildComponent(componentType: Type<any>): void {
+    private _loadChildComponent(componentType: Type<unknown>): void {
         const viewContainerRef = this._insertionViewRefSignal();
 
         viewContainerRef.clear();
-        this.componentRef = viewContainerRef.createComponent(componentType, { injector: this.injector });
+        this.componentRef = viewContainerRef.createComponent(componentType as Type<object>, { injector: this.injector });
     }
 
     private _calculateAndUpdateSizes(): void {
@@ -103,9 +105,10 @@ export class DynamicModalComponent implements OnInit, AfterViewInit, OnDestroy {
 
         if (this.config.mediaQueries?.length) {
             const mediaQueries = this.config.mediaQueries;
+            const matchMedia = this.document.defaultView?.matchMedia.bind(this.document.defaultView);
 
             mediaQueries.forEach(mediaQuery => {
-                const isMatch = window.matchMedia(mediaQuery.query).matches;
+                const isMatch = matchMedia?.(mediaQuery.query).matches ?? false;
 
                 if (isMatch) {
                     width = mediaQuery.width;

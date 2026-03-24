@@ -1,13 +1,14 @@
 :host {
-    --bottom-gradient-height: 80px;
+    --bottom-gradient-height: 120px;
+    --max-article-height: 250px;
 
     .article-card {
         position: relative;
         display: flex;
         flex-direction: column;
         gap: var(--an-gap-12);
-        max-height: 200px;
-        min-height: 200px;
+        max-height: var(--max-article-height);
+        min-height: var(--max-article-height);
         padding: var(--an-padding-16);
         border-radius: var(--an-border-radius-12);
         border: 1px solid var(--an-border-light);
@@ -15,6 +16,8 @@
         box-shadow: var(--an-shadow-md);
         overflow: hidden;
         cursor: pointer;
+
+        transition: box-shadow var(--an-transition-fast);
 
         &:hover {
             box-shadow: var(--an-shadow-lg);
@@ -42,7 +45,7 @@
             right: 0;
 
             height: var(--bottom-gradient-height);
-            background: linear-gradient(0, var(--an-bg-card) 5%, transparent 100%);
+            background: linear-gradient(0, var(--an-bg-card) 10%, transparent 100%);
             pointer-events: none;
         }
     }

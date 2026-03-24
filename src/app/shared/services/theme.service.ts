@@ -1,4 +1,5 @@
-import { effect, Injectable, signal } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { effect, inject, Injectable, RendererFactory2, signal } from '@angular/core';
 
 export enum EThemeType {
     LIGHT = 'light',
@@ -11,8 +12,10 @@ const THEME_PREFIX = 'an-theme-';
 
 @Injectable({ providedIn: 'root' })
 export class ThemeService {
-    private readonly _colorThemeSignal = signal<EThemeType>(this._loadInitialThemeState());
+    private readonly document = inject(DOCUMENT);
+    private readonly rendererFactory = inject(RendererFactory2);
 
+    private readonly _colorThemeSignal = signal<EThemeType>(this._loadInitialThemeState());
     public readonly colorThemeSignal = this._colorThemeSignal.asReadonly();
 
     private readonly _colorThemeChangeEffect = effect(() => {
@@ -21,6 +24,8 @@ export class ThemeService {
         localStorage.setItem(STORAGE_THEME_FIELD_NAME, theme);
         this._applyThemeToBody(theme);
     });
+
+    private readonly _bodyRenderer = this.rendererFactory.createRenderer(this.document.body, null);
 
     public toggleColorTheme(theme: EThemeType): void {
         this._colorThemeSignal.update(() => theme);
@@ -36,17 +41,24 @@ export class ThemeService {
             return foundedTheme;
         }
 
-        return window.matchMedia?.('(prefers-color-scheme: dark)').matches ? EThemeType.DARK : DEFAULT_THEME;
+        return this.document.defaultView?.matchMedia?.('(prefers-color-scheme: dark)').matches
+            ? EThemeType.DARK
+            : DEFAULT_THEME;
     }
 
     private _applyThemeToBody(theme: EThemeType): void {
-        const classList = document.body.classList;
+        const body = this.document.body;
 
-        Array.from(classList)
-            .filter(className => className.startsWith(THEME_PREFIX))
-            .forEach(className => classList.remove(className));
+        if (!body) {
+            return;
+        }
 
-        classList.add(`${ THEME_PREFIX }${ theme }`);
-        localStorage.setItem(STORAGE_THEME_FIELD_NAME, theme.toString());
+        for (const className of Array.from(body.classList)) {
+            if (className.startsWith(THEME_PREFIX)) {
+                this._bodyRenderer.removeClass(body, className);
+            }
+        }
+
+        this._bodyRenderer.addClass(body, `${ THEME_PREFIX }${ theme }`);
     }
 }

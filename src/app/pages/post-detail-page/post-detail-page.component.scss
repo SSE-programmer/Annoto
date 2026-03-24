@@ -56,7 +56,7 @@
 
     .article__meta {
         display: flex;
-        gap: var(--an-gap-12);
+        gap: var(--an-gap-4) var(--an-gap-12);
         align-items: center;
         flex-wrap: wrap;
 
@@ -76,15 +76,7 @@
         }
     }
 
-    .title {
-        font-size: 1.75rem;
-        font-weight: 600;
-        line-height: 1.25;
-        color: var(--an-text-primary);
-    }
-
     .content {
-        line-height: 1.5;
         color: var(--an-text-secondary);
         white-space: pre-wrap;
     }
