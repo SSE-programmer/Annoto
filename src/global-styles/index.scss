@@ -4,6 +4,7 @@
 @use "scrollbar";
 @use "containers";
 @use "fonts";
+@use "components";
 
 body {
     display: block;
@@ -12,4 +13,10 @@ body {
     background: var(--an-bg-primary);
 
     font-family: 'Roboto', sans-serif;
+}
+
+*:focus-visible {
+    outline: none;
+    box-shadow: var(--an-input-focus-shadow);
+    transition: box-shadow var(--an-transition-base);;
 }

@@ -1,7 +1,8 @@
 <an-button
     class="create-post-button"
-    label="Create new post"
+    label="Создать статью"
     dashed
+    (onClick)="openCreatePostModal()"
 >
     <ng-template #iconRight><an-icon-plus/></ng-template>
 </an-button>

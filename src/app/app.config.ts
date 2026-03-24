@@ -1,5 +1,6 @@
 import {
-    ApplicationConfig, inject,
+    ApplicationConfig,
+    inject,
     provideAppInitializer,
     provideBrowserGlobalErrorListeners,
     provideZonelessChangeDetection

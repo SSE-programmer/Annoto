@@ -32,10 +32,15 @@
     --an-tooltip-text: #ffffff;
     --an-tooltip-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 
+    --an-modal-bg: var(--an-bg-secondary);
+    --an-modal-wrapper-bg: #90909077;
+    --an-modal-text: var(--an-text-primary);
+    --an-modal-shadow: var(--an-tooltip-shadow);
+
     --an-input-bg: #ffffff;
     --an-input-border: #dee2e6;
     --an-input-focus-border: #4263eb;
-    --an-input-focus-shadow: 0 0 0 3px rgba(66, 99, 235, 0.1);
+    --an-input-focus-shadow: 0 0 0 3px rgba(66, 99, 235, 0.4);
 
     --an-button-primary-bg: #4263eb;
     --an-button-primary-text: #ffffff;
@@ -89,10 +94,15 @@
     --an-tooltip-text: #e9ecef;
     --an-tooltip-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 
-    --an-input-bg: #2d2d2d;
+    --an-modal-bg: var(--an-tooltip-bg);
+    --an-modal-wrapper-bg: #90909077;
+    --an-modal-text: var(--an-tooltip-text);
+    --an-modal-shadow: var(--an-tooltip-shadow);
+
+    --an-input-bg: #202020;
     --an-input-border: #404040;
     --an-input-focus-border: #5c7cfa;
-    --an-input-focus-shadow: 0 0 0 3px rgba(92, 124, 250, 0.2);
+    --an-input-focus-shadow: 0 0 0 3px rgba(92, 124, 250, 0.4);
 
     --an-button-primary-bg: #5c7cfa;
     --an-button-primary-text: #ffffff;

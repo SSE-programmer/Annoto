@@ -1,5 +1,8 @@
 :host {
+    --bottom-gradient-height: 80px;
+
     .article-card {
+        position: relative;
         display: flex;
         flex-direction: column;
         gap: var(--an-gap-12);
@@ -8,15 +11,28 @@
         border: 1px solid var(--an-border-light);
         background: var(--an-bg-card);
         box-shadow: var(--an-shadow-md);
-    }
 
-    .article-card__title {
-        font-size: 1.125rem;
-        font-weight: 600;
-        color: var(--an-text-primary);
-    }
+        max-height: 200px;
+        overflow: hidden;
 
-    .article-card__text {
-        color: var(--an-text-secondary);
+        &__title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--an-text-primary);
+        }
+
+        &__text {
+            color: var(--an-text-secondary);
+        }
+
+        &__bottom-gradient {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+
+            height: var(--bottom-gradient-height);
+            background: linear-gradient(0, var(--an-bg-card) 5%, transparent 100%);
+        }
     }
 }

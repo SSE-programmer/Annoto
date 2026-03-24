@@ -1,0 +1,15 @@
+<aside class="dynamic-modal-wrapper">
+    <div
+        class="dynamic-modal"
+        [style.width]="widthSignal()"
+        [style.height]="heightSignal()"
+        #dynamicModal
+    >
+        <div
+            class="dynamic-modal__body"
+            #body
+        >
+            <ng-container #insertionViewRef></ng-container>
+        </div>
+    </div>
+</aside>

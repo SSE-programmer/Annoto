@@ -1,0 +1,63 @@
+.an-input,
+.an-textarea {
+    width: 100%;
+    border: 1px solid var(--an-input-border);
+    border-radius: var(--an-border-radius-10);
+    padding: var(--an-padding-12) var(--an-padding-16);
+    background-color: var(--an-input-bg);
+    color: var(--an-text-primary);
+    box-shadow: var(--an-shadow-sm);
+    transition:
+        border-color var(--an-transition-fast),
+        box-shadow var(--an-transition-base),
+        background-color var(--an-transition-base),
+        color var(--an-transition-base);
+
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+}
+
+.an-input::placeholder,
+.an-textarea::placeholder {
+    color: var(--an-text-tertiary);
+}
+
+.an-input:hover:not(:disabled):not(.ng-invalid):not([readonly]),
+.an-textarea:hover:not(:disabled):not(.ng-invalid):not([readonly]) {
+    border-color: var(--an-border-dark);
+}
+
+.an-input:focus-visible,
+.an-textarea:focus-visible {
+    border-color: var(--an-input-focus-border);
+    box-shadow: var(--an-input-focus-shadow);
+}
+
+.an-input.ng-invalid.ng-touched,
+.an-textarea.ng-invalid.ng-touched {
+    border-color: var(--an-accent-danger);
+}
+
+.an-input.ng-invalid.ng-touched:focus-visible,
+.an-textarea.ng-invalid.ng-touched:focus-visible {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--an-accent-danger) 35%, transparent);
+}
+
+.an-input:disabled,
+.an-textarea:disabled {
+    color: var(--an-disabled-text);
+    border-color: var(--an-disabled-border);
+    background-color: var(--an-disabled-bg);
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+.an-input {
+    min-height: 40px;
+}
+
+.an-textarea {
+    min-height: 120px;
+    line-height: 1;
+    resize: vertical;
+}

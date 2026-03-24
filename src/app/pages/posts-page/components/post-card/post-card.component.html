@@ -1,4 +1,12 @@
-<article class="article-card">
+<article
+    class="article-card"
+    #articleCard
+    (click)="onClick.emit($event)"
+>
     <h2 class="article-card__title">{{ post().title }}</h2>
     <p class="article-card__text">{{ post().content }}</p>
+
+    @if (isHeightOverflow()) {
+        <span class="article-card__bottom-gradient"></span>
+    }
 </article>

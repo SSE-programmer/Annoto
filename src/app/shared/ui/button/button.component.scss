@@ -16,7 +16,7 @@
         border-radius: var(--an-border-radius-20);
         cursor: pointer;
         overflow: hidden;
-        transition: all 0.3s ease;
+        transition: all var(--an-transition-base);
 
         font-family: inherit;
         font-weight: 400;
@@ -69,7 +69,6 @@
 
         &:not(:disabled):focus-visible {
             outline: none;
-            border-color: var(--an-input-focus-border);
             box-shadow: var(--an-input-focus-shadow);
         }
     }

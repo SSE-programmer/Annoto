@@ -21,4 +21,8 @@ export class PostsPageComponent {
 
     protected readonly postsLoadingSignal = this.postsPageService.isPostsLoadingSignal;
     protected readonly postsSignal = this.postsPageService.postsSignal;
+
+    protected openCreatePostModal(): void {
+        this.postsPageService.openCreatePostModal();
+    }
 }

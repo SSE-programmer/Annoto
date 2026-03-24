@@ -1,0 +1,79 @@
+<header class="header">
+    <h2>Новая статья</h2>
+
+    <an-icon-cross
+        role="button"
+        (click)="close()"
+        (keydown.enter)="close()"
+    />
+</header>
+
+<main>
+    <form
+        class="form"
+        [formGroup]="form"
+    >
+        <div class="form-field-container">
+            @let titleControl = form.controls.title;
+
+            <label
+                class="an-label"
+                for="title"
+            >
+                Title
+            </label>
+            <input
+                class="an-input"
+                name="title"
+                [formControl]="titleControl"
+            >
+
+            @if (titleControl.invalid && titleControl.touched) {
+                <small
+                    class="an-error-message"
+                    anErrorsField
+                    [control]="titleControl"
+                ></small>
+            }
+        </div>
+
+        <div class="form-field-container">
+            @let contentControl = form.controls.content;
+
+            <label
+                class="an-label"
+                for="content"
+            >
+                Content
+            </label>
+            <textarea
+                class="an-textarea"
+                name="content"
+                formControlName="content"
+            ></textarea>
+
+            @if (contentControl.invalid && contentControl.touched) {
+                <small
+                    class="an-error-message"
+                    anErrorsField
+                    [control]="contentControl"
+                ></small>
+            }
+        </div>
+    </form>
+</main>
+
+<footer class="footer">
+    <an-button
+        label="Сохранить"
+        [loading]="isPostSaving()"
+        (click)="savePost()"
+    />
+
+    <an-button
+        label="Отменить"
+        severity="secondary"
+        outlined
+        (click)="close()"
+    />
+</footer>

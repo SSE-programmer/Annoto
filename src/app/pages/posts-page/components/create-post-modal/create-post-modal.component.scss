@@ -1,0 +1,30 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    gap: var(--an-gap-24);
+    padding: var(--an-padding-12);
+    overflow: auto;
+
+    &::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    .header {
+        display: flex;
+        gap: var(--an-gap-12);
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        gap: var(--an-gap-24);
+    }
+
+    .footer {
+        display: flex;
+        gap: var(--an-gap-12);
+        align-items: center;
+    }
+}

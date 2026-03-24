@@ -1,12 +1,17 @@
 :host {
     --hue: 0;
     --trans-dur: 0.4s;
-    --trans-timing: cubic-bezier(0.65,0,0.35,1);
+    --trans-timing: cubic-bezier(0.65, 0, 0.35, 1);
 
     .switch,
     .switch__input {
         position: relative;
         -webkit-tap-highlight-color: transparent;
+    }
+
+    .switch__input:focus-visible {
+        outline: none;
+        box-shadow: var(--an-input-focus-shadow);
     }
 
     .switch {
@@ -24,7 +29,7 @@
         display: block;
         width: 3em;
         height: 1.5em;
-        transition: background-color var(--trans-dur) var(--trans-timing);
+        transition: background-color var(--trans-dur) var(--trans-timing), box-shadow var(--an-transition-base);
         -webkit-appearance: none;
         appearance: none;
     }
