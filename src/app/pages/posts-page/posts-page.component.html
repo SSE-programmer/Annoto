@@ -10,14 +10,23 @@
     </ng-template>
 </an-button>
 
-
-<div class="posts-grid">
-    @for (post of postsSignal(); track post.id) {
-        <an-post-card
-            [post]="post"
-            (onClick)="goToPostPage(post.id)"
-        />
-    } @empty {
-        <span class="not-found">Ничего не найдено</span>
-    }
-</div>
+@if (isPostsLoadingSignal()) {
+    <div
+        class="loader"
+        aria-busy="true"
+        aria-live="polite"
+    >
+        <an-loading-spinner/>
+    </div>
+} @else {
+    <div class="posts-grid">
+        @for (post of postsSignal(); track post.id) {
+            <an-post-card
+                [post]="post"
+                (onClick)="goToPostPage(post.id)"
+            />
+        } @empty {
+            <span class="not-found">Ничего не найдено</span>
+        }
+    </div>
+}

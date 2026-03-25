@@ -50,6 +50,6 @@ describe('PostsPageComponent', () => {
     });
 
     it('should finish loading after posts fetch', () => {
-        expect(component['postsLoadingSignal']()).toBe(false);
+        expect(component['isPostsLoadingSignal']()).toBe(false);
     });
 });

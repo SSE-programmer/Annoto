@@ -8,6 +8,13 @@
         width: fit-content;
     }
 
+    .loader {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 160px;
+    }
+
     .posts-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
