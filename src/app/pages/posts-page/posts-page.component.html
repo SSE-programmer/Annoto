@@ -17,5 +17,7 @@
             [post]="post"
             (onClick)="goToPostPage(post.id)"
         />
+    } @empty {
+        <span class="not-found">Ничего не найдено</span>
     }
 </div>
