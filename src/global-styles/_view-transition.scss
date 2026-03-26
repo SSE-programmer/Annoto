@@ -1,0 +1,19 @@
+@keyframes page-old-out {
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes page-new-in {
+    from {
+        opacity: 0;
+    }
+}
+
+::view-transition-old(page-container) {
+    animation: 500ms ease-out both page-old-out;
+}
+
+::view-transition-new(page-container) {
+    animation: 500ms ease-out both page-new-in;
+}

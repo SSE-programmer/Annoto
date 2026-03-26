@@ -3,6 +3,10 @@
     flex-direction: column;
     min-height: 100dvh;
 
+    #page-container {
+        view-transition-name: page-container;
+    }
+
     .main {
         flex: 1;
         background: var(--an-bg-primary);
