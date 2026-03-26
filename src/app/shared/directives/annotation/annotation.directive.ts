@@ -42,6 +42,7 @@ import {
     ConfirmDialogModalComponent,
     IConfirmDialogData,
 } from '@shared/components/confirm-dialog-modal/confirm-dialog-modal.component';
+import { MODAL_WIDTH_MD } from '@shared/constants/modal-config';
 
 
 @Directive({
@@ -253,7 +254,7 @@ export class AnnotationDirective implements AfterViewInit {
             AnnotationCreateModalComponent,
             {
                 modalName: ANNOTATION_MODAL_NAME,
-                width: '460px',
+                width: MODAL_WIDTH_MD,
                 data: {
                     mode: 'create',
                     onSave: (color: string, text: string) => this._createAnnotation(range, color, text),
@@ -272,7 +273,7 @@ export class AnnotationDirective implements AfterViewInit {
             AnnotationCreateModalComponent,
             {
                 modalName: ANNOTATION_MODAL_NAME,
-                width: '460px',
+                width: MODAL_WIDTH_MD,
                 data: {
                     mode: 'edit',
                     initialColor: annotation.color,
@@ -484,7 +485,7 @@ export class AnnotationDirective implements AfterViewInit {
             ConfirmDialogModalComponent,
             {
                 modalName: ConfirmDialogModalComponent.name,
-                width: '460px',
+                width: MODAL_WIDTH_MD,
                 data: {
                     message: 'Удалить аннотацию?',
                     confirmLabel: 'Удалить',

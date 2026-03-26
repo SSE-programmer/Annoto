@@ -13,6 +13,7 @@ import {
     IConfirmDialogData,
 } from '@shared/components/confirm-dialog-modal/confirm-dialog-modal.component';
 import { catchError, distinctUntilChanged, finalize, map, merge, of, Subject, switchMap, tap } from 'rxjs';
+import { MODAL_WIDTH_MD } from '@shared/constants/modal-config';
 
 @Injectable()
 export class PostDetailPageService {
@@ -66,7 +67,7 @@ export class PostDetailPageService {
     public openDeletePostConfirm(post: IPost): void {
         this.dynamicModalService.open<IConfirmDialogData>(ConfirmDialogModalComponent, {
             modalName: ConfirmDialogModalComponent.name,
-            width: '460px',
+            width: MODAL_WIDTH_MD,
             data: {
                 message: 'Вы действительно хотите удалить статью?',
                 confirmLabel: 'Да',
