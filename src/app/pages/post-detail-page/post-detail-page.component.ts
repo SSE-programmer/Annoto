@@ -6,6 +6,7 @@ import { LoadingSpinnerComponent } from '@shared/ui/loading-spinner/loading-spin
 import { IconBackComponent } from '@shared/ui/icons/icon-back/icon-back.component';
 import { IconPencilComponent } from '@shared/ui/icons/icon-pencil/icon-pencil.component';
 import { IconTrashComponent } from '@shared/ui/icons/icon-trash/icon-trash.component';
+import { IconQuestionComponent } from '@shared/ui/icons/icon-question/icon-question.component';
 import { ButtonComponent } from '@shared/ui/button/button.component';
 import { IPost } from '@shared/services/http/posts-http/models';
 import { AnnotationDirective } from '@shared/directives/annotation/annotation.directive';
@@ -19,6 +20,7 @@ import { AnnotationDirective } from '@shared/directives/annotation/annotation.di
         IconBackComponent,
         IconPencilComponent,
         IconTrashComponent,
+        IconQuestionComponent,
         ButtonComponent,
         AnnotationDirective,
     ],

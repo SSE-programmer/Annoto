@@ -15,6 +15,22 @@
             <an-icon-back/>
             К списку статей</a>
         <div class="toolbar__actions">
+            <div class="help-hint">
+                <button
+                    class="help-hint__trigger"
+                    type="button"
+                    aria-label="Подсказка по аннотациям"
+                >
+                    <an-icon-question/>
+                </button>
+                <div
+                    class="help-hint__tooltip"
+                    role="tooltip"
+                >
+                    Выделите фрагмент текста статьи, чтобы оставить аннотацию.
+                    Пересекающиеся аннотации запрещены, но вложенные допустимы.
+                </div>
+            </div>
             <an-button
                 label="Редактировать"
                 ariaLabel="Редактировать статью"
