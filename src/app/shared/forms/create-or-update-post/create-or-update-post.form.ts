@@ -10,17 +10,16 @@ export interface ICreateOrUpdatePostForm {
 
 export function getCreateOrUpdatePostForm(post?: IPost): FormGroup<ICreateOrUpdatePostForm> {
     const form = new FormGroup<ICreateOrUpdatePostForm>({
-        id: new FormControl('', { nonNullable: true }),
-        title: new FormControl('', { nonNullable: true, validators: [Validators.required, Validators.maxLength(100)] }),
-        content: new FormControl('', {
+        id: new FormControl(post?.id ?? '', { nonNullable: true }),
+        title: new FormControl(post?.title ?? '', {
+            nonNullable: true,
+            validators: [Validators.required, Validators.maxLength(100)]
+        }),
+        content: new FormControl(post?.content ?? '', {
             nonNullable: true,
             validators: [Validators.maxLength(POST_CONTENT_MAX_LENGTH)],
         }),
     });
-
-    if (post) {
-        form.patchValue(post);
-    }
 
     return form;
 }

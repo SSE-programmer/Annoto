@@ -1,7 +1,5 @@
 export const ANNOTATION_ATTR = 'data-annotation-id';
 
-export const ANNOTATION_KEY_PREFIX = 'annotations:';
-
 export const ANNOTATION_CLASS = 'an-annotation';
 
 export const TOOLTIP_SHOW_DELAY = 1000;

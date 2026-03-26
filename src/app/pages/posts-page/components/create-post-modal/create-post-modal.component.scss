@@ -22,6 +22,14 @@
         gap: var(--an-gap-24);
     }
 
+    .warning-message {
+        display: inline-block;
+        margin-top: var(--an-gap-8);
+        color: var(--an-accent-warning);
+        font-size: 0.8125rem;
+        line-height: 1.25rem;
+    }
+
     .footer {
         display: flex;
         gap: var(--an-gap-12);

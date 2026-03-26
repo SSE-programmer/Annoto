@@ -19,7 +19,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { fromEvent, merge } from 'rxjs';
 
 import { IAnnotation } from './models/annotation.model';
-import { ANNOTATION_ATTR, ANNOTATION_KEY_PREFIX, TOOLTIP_HIDE_DELAY, TOOLTIP_SHOW_DELAY } from './constants';
+import { ANNOTATION_ATTR, TOOLTIP_HIDE_DELAY, TOOLTIP_SHOW_DELAY } from './constants';
 import { isSelectionInsideRoot, selectionIntersectsAnnotation } from './utils/selection.utils';
 import { computeFloatingPosition } from './utils/position.utils';
 import {
@@ -49,7 +49,7 @@ import {
     standalone: true,
 })
 export class AnnotationDirective implements AfterViewInit {
-    public readonly annotationKey = input.required<string, string>({ transform: (key) => `${ ANNOTATION_KEY_PREFIX }${ key }` });
+    public readonly annotationKey = input.required<string>();
     public readonly readonly = input(false, { transform: booleanAttribute });
 
     private readonly elementRef = inject(ElementRef<HTMLElement>);

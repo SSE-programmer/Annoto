@@ -1,5 +1,5 @@
 <header class="header">
-    <h2>{{ createPostModalService.editingPost ? 'Редактирование статьи' : 'Новая статья' }}</h2>
+    <h2>{{ isEditingPost() ? 'Редактирование статьи' : 'Новая статья' }}</h2>
 
     <an-icon-cross
         role="button"
@@ -51,6 +51,12 @@
                 name="content"
                 formControlName="content"
             ></textarea>
+
+            @if (annotationsWillBeRemovedSignal()) {
+                <small class="warning-message">
+                    При изменении текста статьи все связанные аннотации будут удалены.
+                </small>
+            }
 
             @if (contentControl.invalid && contentControl.touched) {
                 <small

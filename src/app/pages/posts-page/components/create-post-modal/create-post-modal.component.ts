@@ -25,11 +25,13 @@ export interface IConfig {
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreatePostModalComponent {
-    protected readonly createPostModalService = inject(CreatePostModalService);
+    private readonly createPostModalService = inject(CreatePostModalService);
 
     protected readonly form = this.createPostModalService.form;
 
+    protected readonly isEditingPost = this.createPostModalService.isEditingPost;
     protected readonly isPostSaving = this.createPostModalService.isPostSaving;
+    protected readonly annotationsWillBeRemovedSignal = this.createPostModalService.annotationsWillBeRemovedSignal;
 
     protected savePost() {
         this.createPostModalService.savePost();
