@@ -60,7 +60,13 @@
             }
         </div>
         <h1 class="title">{{ post.title }}</h1>
-        <p class="content">{{ post.content }}</p>
+        <p
+            class="content"
+            anAnnotation
+            annotationKey="post-detail:{{post.id}}"
+        >
+            {{ post.content }}
+        </p>
     </article>
 } @else {
     <div class="toolbar toolbar--single">

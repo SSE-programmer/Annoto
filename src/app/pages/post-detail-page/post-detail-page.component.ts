@@ -8,6 +8,7 @@ import { IconPencilComponent } from '@shared/ui/icons/icon-pencil/icon-pencil.co
 import { IconTrashComponent } from '@shared/ui/icons/icon-trash/icon-trash.component';
 import { ButtonComponent } from '@shared/ui/button/button.component';
 import { IPost } from '@shared/services/http/posts-http/models';
+import { AnnotationDirective } from '@shared/directives/annotation/annotation.directive';
 
 @Component({
     selector: 'an-post-detail-page',
@@ -19,6 +20,7 @@ import { IPost } from '@shared/services/http/posts-http/models';
         IconPencilComponent,
         IconTrashComponent,
         ButtonComponent,
+        AnnotationDirective,
     ],
     providers: [PostDetailPageService],
     templateUrl: './post-detail-page.component.html',

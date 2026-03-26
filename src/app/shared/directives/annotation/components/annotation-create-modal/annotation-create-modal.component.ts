@@ -3,23 +3,22 @@ import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators 
 import { DynamicModalConfig } from '@shared/components/dynamic-modal/dynamic-modal-config';
 import { DynamicModalService } from '@shared/components/dynamic-modal/dynamic-modal.service';
 import { ButtonComponent } from '@shared/ui/button/button.component';
+import { AnnotationColor } from '@shared/directives/annotation/models/annotation.model';
 
 
 export const ANNOTATION_MODAL_NAME = 'annotation-modal';
 
 export interface IAnnotationModalData {
     mode: 'create' | 'edit';
-    initialColor?: PresetColor;
+    initialColor?: AnnotationColor;
     initialText?: string;
     onSave: (color: string, text: string) => void;
 }
 
 interface IAnnotationForm {
-    color: FormControl<PresetColor>;
+    color: FormControl<AnnotationColor>;
     text: FormControl<string>;
 }
-
-type PresetColor = typeof PRESET_COLORS[number];
 
 const PRESET_COLORS = [
     '#f03e3e',
@@ -48,7 +47,7 @@ export class AnnotationCreateModalComponent {
     protected readonly presetColors = PRESET_COLORS;
 
     protected readonly form = this.fb.group<IAnnotationForm>({
-        color: this.fb.nonNullable.control<PresetColor>(this.config.data.initialColor ?? PRESET_COLORS[0]),
+        color: this.fb.nonNullable.control<AnnotationColor>(this.config.data.initialColor ?? PRESET_COLORS[0]),
         text: this.fb.nonNullable.control(this.config.data.initialText ?? '', [Validators.required, Validators.minLength(1)])
     });
 

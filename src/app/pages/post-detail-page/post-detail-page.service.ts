@@ -66,7 +66,7 @@ export class PostDetailPageService {
     public openDeletePostConfirm(post: IPost): void {
         this.dynamicModalService.open<IConfirmDialogData>(ConfirmDialogModalComponent, {
             modalName: ConfirmDialogModalComponent.name,
-            width: '420px',
+            width: '460px',
             data: {
                 message: 'Вы действительно хотите удалить статью?',
                 confirmLabel: 'Да',
