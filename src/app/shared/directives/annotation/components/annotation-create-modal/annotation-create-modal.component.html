@@ -1,0 +1,62 @@
+<div class="modal-content">
+    <h3 class="modal-content__title">{{ title }}</h3>
+
+    <form
+        class="modal-content__form"
+        [formGroup]="form"
+    >
+        <fieldset class="modal-content__section">
+            <label class="an-label">Цвет</label>
+            <div
+                class="color-picker"
+                role="radiogroup"
+                aria-label="Выбор цвета аннотации"
+            >
+                @for (color of presetColors; track color) {
+                    @let colorControl = form.controls.color;
+                    @let selectedColor = colorControl.value;
+
+                    <button
+                        class="color-picker__swatch"
+                        [class.color-picker__swatch--active]="colorControl.value === color"
+                        [style.background-color]="color"
+                        [attr.aria-label]="'Цвет ' + color"
+                        [attr.aria-checked]="selectedColor === color"
+                        role="radio"
+                        (click)="colorControl.setValue(color)"
+                    ></button>
+                }
+            </div>
+        </fieldset>
+
+        <fieldset class="modal-content__section">
+            <label
+                class="an-label"
+                for="annotationText"
+            >
+                Текст аннотации
+            </label>
+            <textarea
+                id="annotationText"
+                class="an-input"
+                rows="3"
+                placeholder="Введите текст аннотации..."
+                formControlName="text"
+            ></textarea>
+        </fieldset>
+    </form>
+
+    <footer class="modal-content__footer">
+        <an-button
+            label="Сохранить"
+            [disabled]="!canSave"
+            (onClick)="onSave()"
+        />
+        <an-button
+            label="Отмена"
+            severity="secondary"
+            outlined
+            (onClick)="onCancel()"
+        />
+    </footer>
+</div>
