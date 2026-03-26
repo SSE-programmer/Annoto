@@ -4,7 +4,7 @@ SPA-приложение для создания статей и аннотир�
 Построено на Angular 21, без сторонних UI-библиотек — вся функциональность
 реализована средствами Angular, TypeScript, HTML и CSS.
 
-DEMO: https://annoto-2026.vercel.app/
+DEMO: https://annoto-2026.vercel.app
 
 ---
 ## Принципы
