@@ -19,7 +19,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { fromEvent, merge } from 'rxjs';
 
 import { IAnnotation } from './models/annotation.model';
-import { ANNOTATION_ATTR, TOOLTIP_HIDE_DELAY, TOOLTIP_SHOW_DELAY } from './constants';
+import { ANNOTATION_ATTR, SELECTION_CHANGE_DELAY, TOOLTIP_HIDE_DELAY, TOOLTIP_SHOW_DELAY } from './constants';
 import { isSelectionInsideRoot, selectionIntersectsAnnotation } from './utils/selection.utils';
 import { computeFloatingPosition } from './utils/position.utils';
 import {
@@ -76,6 +76,9 @@ export class AnnotationDirective implements AfterViewInit {
     private _tooltipHideTimer: ReturnType<typeof setTimeout> | null = null;
 
     private _tooltipTarget: HTMLElement | null = null;
+
+    private _selectionChangeTimer: ReturnType<typeof setTimeout> | null = null;
+    private _suppressSelectionChange = false;
 
     private get _root(): HTMLElement {
         return this.elementRef.nativeElement;
@@ -152,6 +155,10 @@ export class AnnotationDirective implements AfterViewInit {
                 }
             });
 
+        fromEvent(this.document, 'selectionchange')
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe(() => this._onSelectionChange());
+
         fromEvent(this.document, 'scroll', { capture: true })
             .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe(() => this._destroyMenu());
@@ -159,10 +166,47 @@ export class AnnotationDirective implements AfterViewInit {
         this.destroyRef.onDestroy(() => {
             this._destroyMenu();
             this._destroyTooltip();
+
+            if (this._selectionChangeTimer !== null) {
+                clearTimeout(this._selectionChangeTimer);
+            }
         });
     }
 
     private _onMouseUp(event: MouseEvent | null): void {
+        this._tryShowMenuForSelection();
+        this._suppressNextSelectionChange();
+    }
+
+    private _onSelectionChange(): void {
+        if (this._suppressSelectionChange) {
+            return;
+        }
+
+        if (this._selectionChangeTimer !== null) {
+            clearTimeout(this._selectionChangeTimer);
+        }
+
+        this._selectionChangeTimer = setTimeout(() => {
+            this._selectionChangeTimer = null;
+            this._tryShowMenuForSelection();
+        }, SELECTION_CHANGE_DELAY);
+    }
+
+    private _suppressNextSelectionChange(): void {
+        this._suppressSelectionChange = true;
+
+        if (this._selectionChangeTimer !== null) {
+            clearTimeout(this._selectionChangeTimer);
+            this._selectionChangeTimer = null;
+        }
+
+        setTimeout(() => {
+            this._suppressSelectionChange = false;
+        }, SELECTION_CHANGE_DELAY + 100);
+    }
+
+    private _tryShowMenuForSelection(): void {
         if (this.readonly()) {
             return;
         }

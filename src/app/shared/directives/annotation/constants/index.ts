@@ -5,3 +5,5 @@ export const ANNOTATION_CLASS = 'an-annotation';
 export const TOOLTIP_SHOW_DELAY = 1000;
 
 export const TOOLTIP_HIDE_DELAY = 300;
+
+export const SELECTION_CHANGE_DELAY = 400;
