@@ -1,0 +1,34 @@
+<div
+    class="tooltip"
+    role="tooltip"
+>
+    @for (annotation of annotations(); track annotation.id) {
+        <div class="tooltip__item">
+            <div class="tooltip__header">
+                <span
+                    class="tooltip__color"
+                    [style.background-color]="annotation.color"
+                ></span>
+                <span class="tooltip__text">{{ annotation.text }}</span>
+            </div>
+            @if (!readonly()) {
+                <div class="tooltip__actions">
+                    <button
+                        class="tooltip__action-btn"
+                        aria-label="Редактировать аннотацию"
+                        (click)="editAnnotation.emit(annotation.id)"
+                    >
+                        &#9998;
+                    </button>
+                    <button
+                        class="tooltip__action-btn tooltip__action-btn--danger"
+                        aria-label="Удалить аннотацию"
+                        (click)="deleteAnnotation.emit(annotation.id)"
+                    >
+                        &#10005;
+                    </button>
+                </div>
+            }
+        </div>
+    }
+</div>
